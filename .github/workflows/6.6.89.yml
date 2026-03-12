@@ -241,19 +241,13 @@ jobs:
               echo "SukiSU版本号: v${KSU_API_VERSION}-${GIT_COMMIT_HASH}-酷安@悠然浅陌"
             fi
 
-      - name: ⚙️ apply lz4 lz4 1.10.0 & zstd 1.5.7 Patch (应用lz4 1.10.0 & zstd 1.5.7补丁)
+      - name: ⚙️ apply unicode_bypass_fix_6.1 Patch (应用Unicode零宽补丁)
         run: |
-          echo "正在添加lz4 1.10.0 & zstd 1.5.7补丁…"
+          echo "正在添加unicode_bypass_fix_6.1补丁…"
           cd kernel_workspace
-          git clone https://github.com/cctv18/oppo_oplus_realme_sm8750.git
-          cp ./oppo_oplus_realme_sm8750/zram_patch/001-lz4.patch ./common/
-          cp ./oppo_oplus_realme_sm8750/zram_patch/lz4armv8.S ./common/lib
-          cp ./oppo_oplus_realme_sm8750/zram_patch/002-zstd.patch ./common/
           cd ./common
-          wget https://raw.githubusercontent.com/Numbersf/Action-Build/refs/heads/SukiSU-Ultra/patches/unicode_bypass_fix_6.1+.patch
-          git apply -p1 < 001-lz4.patch || true
-          patch -p1 < 002-zstd.patch || true
-          patch -p1 --forward < unicode_bypass_fix_6.1+.patch || true
+          wget https://raw.githubusercontent.com/lemonsn/kernel/refs/heads/main/unicode_bypass_fix_6.1.patch
+          patch -p1 --forward < unicode_bypass_fix_6.1.patch || true
 
           
       - name: 🔧 Set gki_defconfig (设置编译配置)
