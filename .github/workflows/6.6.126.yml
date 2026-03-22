@@ -190,14 +190,6 @@ jobs:
               echo "SukiSU版本号: v${KSU_API_VERSION}-${GIT_COMMIT_HASH}-酷安@悠然浅陌"
             fi
 
-      - name: ⚙️ apply unicode_bypass_fix_6.1 Patch (应用Unicode零宽补丁)
-        run: |
-          echo "正在添加unicode_bypass_fix_6.1补丁…"
-          cd kernel_workspace
-          cd ./common
-          wget https://raw.githubusercontent.com/lemonsn/kernel/refs/heads/main/unicode_bypass_fix_6.1.patch
-          patch -p1 --forward < unicode_bypass_fix_6.1.patch || true
-
           
       - name: 🔧 Set gki_defconfig (设置编译配置)
         run: |
