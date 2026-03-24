@@ -184,7 +184,6 @@ jobs:
         run: |
           cd kernel_workspace
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
-          printf '%s\n' 'KSU_FULL_NAME_FORMAT="%TAG_NAME%-%COMMIT_SHA%-Re-酷安@悠然浅陌"' >>  ./common/arch/arm64/configs/gki_defconfig
           
           if [[ "${{ env.ENABLE_KPM }}" == "true" ]]; then
             echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
