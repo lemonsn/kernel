@@ -9,7 +9,7 @@ on:
         options:
           - 'KernelSU'
           - 'ReSukiSU'
-        default: 'ReSukiSU'
+        default: 'KernelSU'
         
       kernel_version:
         description: "📝请选择要编译的版本："
@@ -163,12 +163,7 @@ jobs:
             KSU_VERSION=$(expr $(curl -sI "https://api.github.com/repos/tiann/KernelSU/commits?sha=main&per_page=1" | grep -i "link:" | sed -n 's/.*page=\([0-9]*\)>; rel="last".*/\1/p') "+" 30000)
             echo "KSUVER=$KSU_VERSION" >> $GITHUB_ENV
             echo "ksuver=$KSU_VERSION" >> $GITHUB_OUTPUT
-            KSU_API_VERSION=$(grep -m1 "KSU_VERSION_API :=" kernel/Kbuild | awk -F'= ' '{print $2}' | tr -d '[:space:]')
-            VERSION_DEFINITIONS=$'define get_ksu_version_full\nv\\$1-'"$GIT_COMMIT_HASH"$'-酷安@悠然浅陌\nendef\n\nKSU_VERSION_FULL := v'"$KSU_API_VERSION"$'-'"$GIT_COMMIT_HASH"$'-酷安@悠然浅陌'
             sed -i "s/DKSU_VERSION=16/DKSU_VERSION=${KSU_VERSION}/" kernel/Kbuild
-            sed -i '/define get_ksu_version_full/,/endef/d' kernel/Kbuild
-            sed -i '/KSU_VERSION_FULL :=/d' kernel/Kbuild
-            echo "$VERSION_DEFINITIONS" >> kernel/Kbuild
             fi
 
       - name: ⚙️ apply unicode_bypass_fix_6.1 Patch (应用Unicode零宽补丁)
