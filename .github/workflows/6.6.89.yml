@@ -9,7 +9,8 @@ on:
         options:
           - 'SukiSU'
           - 'ReSukiSU'
-        default: 'ReSukiSU'
+          - 'none'
+        default: 'none'
         
       kernel_version:
         description: "📝请选择要编译的版本："
