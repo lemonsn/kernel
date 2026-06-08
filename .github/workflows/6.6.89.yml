@@ -4,13 +4,12 @@ on:
     inputs:
       ksu_type:
         description: "📝请选择要集成的KSU："
-        required: true
+        required: false
         type: choice
         options:
           - 'SukiSU'
           - 'ReSukiSU'
-          - 'none'
-        default: 'none'
+        default: ''
         
       kernel_version:
         description: "📝请选择要编译的版本："
